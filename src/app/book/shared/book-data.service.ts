@@ -20,4 +20,14 @@ export class BookDataService {
     return this.http.get(`http://localhost:4730/books/${isbn}`).map(response => response.json())
   }
 
+  createBook(book: Book): Observable<Book> {
+
+    return this.http.post('http://localhost:4730/books', book).map(response => response.json());
+  }
+
+  updateBook(isbn: string, vector: any): Observable<Book> {
+
+    return this.http.patch(`http://localhost:4730/books/${isbn}`, vector).map(response => response.json());
+  }
+
 }
