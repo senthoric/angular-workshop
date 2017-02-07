@@ -5,10 +5,12 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
+import { ShoutPipe } from './shared/shout.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ShoutPipe,
   ],
   imports: [
     BrowserModule,
