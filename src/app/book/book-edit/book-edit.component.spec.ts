@@ -4,6 +4,11 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { BookEditComponent } from './book-edit.component';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
+import { BookDataService } from '../shared/book-data.service';
+import { HttpModule } from '@angular/http';
 
 describe('BookEditComponent', () => {
   let component: BookEditComponent;
@@ -11,9 +16,11 @@ describe('BookEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BookEditComponent ]
+      declarations: [BookEditComponent],
+      imports: [FormsModule, RouterModule.forRoot([]), HttpModule],
+      providers: [{provide: APP_BASE_HREF, useValue: '/'}, BookDataService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

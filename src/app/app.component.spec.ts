@@ -2,13 +2,27 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
+import { ShoutPipe } from './shared/shout.pipe';
+import { TooltipDirective } from './shared/tooltip.directive';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('AppComponent', () => {
+
   beforeEach(() => {
+
     TestBed.configureTestingModule({
       declarations: [
+        ShoutPipe,
+        TooltipDirective,
         AppComponent
       ],
+      imports: [
+        RouterModule.forRoot([]),
+      ],
+      providers: [
+        { provide: APP_BASE_HREF, useValue: '/' }
+      ]
     });
     TestBed.compileComponents();
   });
@@ -25,10 +39,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('app works!');
   }));
 
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
 });
