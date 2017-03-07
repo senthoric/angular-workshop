@@ -11,6 +11,7 @@ import { BookEditComponent } from './book-edit/book-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookNewComponent } from './book-new/book-new.component';
 import { JsonRequestOptionsService } from './shared/json-request-options.service';
+import { Obj2arrayPipe } from './shared/obj2array.pipe';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { JsonRequestOptionsService } from './shared/json-request-options.service
     BookListComponent,
     BookDetailComponent,
     BookEditComponent,
-    BookNewComponent
+    BookNewComponent,
+    Obj2arrayPipe
   ],
   providers: [
     BookDataService,

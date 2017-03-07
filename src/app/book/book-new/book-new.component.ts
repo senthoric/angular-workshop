@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Book } from '../shared/book';
 import { BookDataService } from '../shared/book-data.service';
@@ -6,13 +6,18 @@ import { BookDataService } from '../shared/book-data.service';
 @Component({
   selector: 'book-new',
   templateUrl: './book-new.component.html',
-  styleUrls: ['./book-new.component.css']
+  styleUrls: ['./book-new.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookNewComponent implements OnInit {
+export class BookNewComponent implements OnInit  {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private bookService: BookDataService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private bookService: BookDataService,
+    private cdr: ChangeDetectorRef
+    ) { }
 
   ngOnInit() {
 
@@ -21,9 +26,17 @@ export class BookNewComponent implements OnInit {
       author: ['', Validators.required]
     });
   }
+  
+  stop() {
+    this.cdr.detach();
+  }
+
+  go(){
+     this.cdr.detectChanges();
+  }
 
   onSubmit() {
-
+    // this.cdr.detectChanges();
     const book: Book = {
       isbn: '',
       title: this.form.value.title,
