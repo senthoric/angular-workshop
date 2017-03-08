@@ -7,7 +7,7 @@ import { BookDataService } from '../shared/book-data.service';
   selector: 'book-new',
   templateUrl: './book-new.component.html',
   styleUrls: ['./book-new.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class BookNewComponent implements OnInit  {
 
@@ -24,19 +24,31 @@ export class BookNewComponent implements OnInit  {
     this.form = this.fb.group({
       title: ['', Validators.required],
       author: ['', Validators.required]
+      // publisher: this.fb.group({
+      //   name: ['', Validators.required],
+      //   url: ['',Validators.required]
+      // })
     });
+    // this.cdr.detach();
   }
   
   stop() {
     this.cdr.detach();
+    console.log('STOP');
+    
   }
 
   go(){
-     this.cdr.detectChanges();
+    console.log('go');
+    
+    //  this.cdr.detectChanges();
   }
 
   onSubmit() {
-    // this.cdr.detectChanges();
+    this.cdr.detectChanges();
+    if(!this.form.valid){
+      return false;
+    }
     const book: Book = {
       isbn: '',
       title: this.form.value.title,
@@ -49,6 +61,14 @@ export class BookNewComponent implements OnInit  {
         url: ''
       }
     };
+
+    // const bookArray= ["isbn",
+    // "title",
+    // "author",
+    // "subtitle",
+    // "abstract",
+    // "numPages",
+    // "publisher" : ["name", "url"]]
 
     this.bookService.createBook(book)
       .subscribe((book: Book) => console.log('Added new book', book));

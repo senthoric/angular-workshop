@@ -4,5 +4,5 @@
     <h3>{{field.key}}: <input type="text" (focus)="stop()" (blur)="go()" [formControlName]="field.key" /></h3>
     <span [hidden]="!form.get(field.key).hasError('required')">{{field.key}} is required</span><br />
   </span>
-  <button [disabled]="!form.valid">Save</button>
+  <button >Save</button>
 </form>
