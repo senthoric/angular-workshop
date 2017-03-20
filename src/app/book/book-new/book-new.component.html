@@ -1,7 +1,26 @@
 <h2>Add New Book</h2>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <span *ngFor="let field of form.value | obj2array">
-    <h3>{{field.key}}: <input type="text" (focus)="stop()" (blur)="go()" [formControlName]="field.key" /></h3>
+  <span >
+    <h3 *ngFor="let field of form.value | obj2array">{{field.key}}: 
+      <input 
+        *ngIf="!isGroup(field)"
+        type="text" 
+        (focus)="stop()" 
+        (blur)="go()" 
+        [formControlName]="field.key" /></h3>
+      <fieldset
+        *ngIf="!isGroup(field)" 
+        [formGroupName]="field.key">
+        {{field | json}}
+        <!--<h3 *ngFor="let _field of field | obj2array">
+          {{field.key}}:
+      <input 
+        *ngIf="!isGroup(_field)"
+        type="text" 
+        (focus)="stop()" 
+        (blur)="go()" 
+        [formControlName]="_field.key" /></h3>-->
+        </fieldset>
     <span [hidden]="!form.get(field.key).hasError('required')">{{field.key}} is required</span><br />
   </span>
   <button >Save</button>

@@ -5,15 +5,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class Obj2arrayPipe implements PipeTransform {
   transform(value, args: string[]): any {
-    let arr = [];
-    for (let key in value) {
-      arr.push({key: key, value: value[key]});
-    }
-    return arr;
-    // let res = this.getAllKeys(value);
-    // console.log(res);
+    // console.log('value',value);
     
-    // return res;
+    // let arr = [];
+    // for (let key in value) {
+    //   arr.push({key: key, value: value[key]});
+    // }
+    // return arr;
+    let res = this.getAllKeys(value);
+    console.log(res);
+    
+    return res;
 
     //   arr.push(key);
     //   if (typeof value[key] === 'object') {
@@ -28,7 +30,7 @@ export class Obj2arrayPipe implements PipeTransform {
     let i = 0;
     for(let key in obj){
       array.push({key: key, value: obj[key]});
-      if (typeof obj[key] === 'object') {
+      if (typeof obj[key] !== 'string') {
         array[i].value = this.getAllKeys(obj[key]);
       }
       i++;

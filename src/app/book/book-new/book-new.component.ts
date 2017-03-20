@@ -24,12 +24,18 @@ export class BookNewComponent implements OnInit  {
     this.form = this.fb.group({
       title: ['', Validators.required],
       author: ['', Validators.required]
-      // publisher: this.fb.group({
-      //   name: ['', Validators.required],
-      //   url: ['',Validators.required]
-      // })
+      ,publisher: this.fb.group({
+        name: ['', Validators.required],
+        url: ['',Validators.required]
+      })
     });
     // this.cdr.detach();
+  }
+
+  isGroup(val: any): boolean{
+    console.log('val',val);
+    if(val === undefined){return false;}
+    return (typeof val.value !== 'string')
   }
   
   stop() {
@@ -41,7 +47,7 @@ export class BookNewComponent implements OnInit  {
   go(){
     console.log('go');
     
-    //  this.cdr.detectChanges();
+     this.cdr.detectChanges();
   }
 
   onSubmit() {

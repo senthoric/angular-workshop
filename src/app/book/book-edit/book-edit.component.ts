@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Book } from '../shared/book';
 import { ActivatedRoute } from '@angular/router';
 import { BookDataService } from '../shared/book-data.service';
@@ -13,12 +13,11 @@ export class BookEditComponent implements OnInit {
 
   book: Book;
 
-  constructor(private route: ActivatedRoute, private bookService: BookDataService) { }
+  constructor(private route: ActivatedRoute, private bookService: BookDataService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-
     this.route.params.mergeMap((params: { isbn: string }) => this.bookService.getBookByIsbn(params.isbn))
-      .subscribe(book => this.book = book);
+      .subscribe(book => {this.book = book; this.cdr.detectChanges();});
   }
 
   onSubmit(value) {

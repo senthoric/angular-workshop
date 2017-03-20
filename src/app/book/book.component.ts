@@ -2,7 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'book',
-  templateUrl: './book.component.html',
+  // templateUrl: './book.component.html',
+  template: '<router-outlet></router-outlet>',
   styleUrls: ['./book.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

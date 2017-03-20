@@ -6,9 +6,7 @@ import { Directive, Input, HostListener, ElementRef } from '@angular/core';
 export class TooltipDirective {
 
   @Input()
-  set tooltip(value: string) {
-    this.tooltipElement.innerText = value;
-  }
+  private tooltip;
 
   tooltipElement: HTMLDivElement = document.createElement('div');
 
@@ -18,11 +16,15 @@ export class TooltipDirective {
 
     elementRef.nativeElement.appendChild(this.tooltipElement);
   }
+  
+  
 
   @HostListener('mouseenter')
   onMouseEnter() {
-
+    this.tooltipElement.innerText = this.tooltip;
     this.tooltipElement.hidden = null;
+    console.log('mouse_enter');
+    
   }
 
   @HostListener('mouseleave')
